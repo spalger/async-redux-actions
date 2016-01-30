@@ -131,6 +131,19 @@ describe('asyncHandlers', function () {
     })
   })
 
+  context('with single handler', function () {
+    it('uses the handler for success', async function () {
+      const type = 'LOAD_USER'
+      const { store } = setup(type, (state, user) => ({ user }))
+
+      const user = {}
+      await store.dispatch({ type, payload: Bluebird.resolve(user) })
+
+      store.getState().ready.should.equal(true)
+      store.getState().user.should.equal(user)
+    })
+  })
+
   context('when passed meta', function () {
     const type = 'ACTION'
     const meta = {}

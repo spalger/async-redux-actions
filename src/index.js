@@ -34,7 +34,12 @@ export function middleware({ dispatch }) {
   }
 }
 
-export function asyncHandlers(type, { success, failure, start } = {}) {
+export function asyncHandlers(type, handlersOrSuccess = {}) {
+  const { start, success, failure } =
+    typeof handlersOrSuccess === 'function'
+      ? { success: handlersOrSuccess }
+      : handlersOrSuccess
+
   if (!type) {
     throw new TypeError(`asyncHandlers requires an action "type" as it's first argument`)
   }

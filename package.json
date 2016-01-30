@@ -1,0 +1,36 @@
+{
+  "name": "@spalger/redux-async-actions",
+  "version": "0.0.0",
+  "description": "Simple action middleware and creator for redux actions that resolve to a promise.",
+  "main": "lib/index.js",
+  "scripts": {
+    "dev": "npm run build -- --watch",
+    "build": "babel --out-dir lib --copy-files src",
+    "prepublish": "npm test && npm run build",
+    "test": "mocha"
+  },
+  "keywords": [
+    "fsa",
+    "flux-standard-action",
+    "async-action",
+    "redux",
+    "promises"
+  ],
+  "author": "Spencer Alger <email@spalger.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@spalger/babel-presets": "0.0.1",
+    "@spalger/eslint-config-personal": "^0.1.2",
+    "babel-cli": "^6.4.5",
+    "babel-eslint": "^5.0.0-beta6",
+    "bluebird": "^3.1.5",
+    "chai": "^3.5.0",
+    "eslint-plugin-react": "^3.16.1",
+    "mocha": "^2.4.5",
+    "redux": "^3.1.4",
+    "redux-actions": "^0.9.1",
+    "redux-mock-store": "0.0.6",
+    "sinon": "^1.17.3"
+  },
+  "dependencies": {}
+}

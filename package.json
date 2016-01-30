@@ -1,6 +1,6 @@
 {
   "name": "@spalger/redux-async-actions",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple action middleware and creator for redux actions that resolve to a promise.",
   "main": "lib/index.js",
   "scripts": {

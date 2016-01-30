@@ -16,12 +16,14 @@ Start off by writing some async actions; FSAs with a `Promise` as their payload.
 
 **actions.js**
 ```js
+import { users } from './api'
+
 export const LOAD_USER = 'LOAD_USER'
 
-function loadUser(id) {
+export function loadUser(id) {
   return {
     type: LOAD_USER,
-    payload: api.users.load()
+    payload: users.load(id),
   }
 }
 ```
@@ -30,23 +32,23 @@ function loadUser(id) {
 ```js
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
-import { asyncHandlers } from '@spalger/redux-async-actions'
+import { asyncHandlers } from '../'
 
 import { LOAD_USER } from './actions'
 
 export default combineReducers({
-  user: handleActions(asyncHandlers(LOAD_USER))
+  user: handleActions(asyncHandlers(LOAD_USER), {}),
 })
 ```
 
 **store.js**
 ```js
 import { createStore, applyMiddleware } from 'redux'
-import { middleware as asyncActionsMiddleware } from '@spalger/redux-async-actions'
+import { middleware as asyncActionsMiddleware } from '../'
 
 import reducer from './reducer'
 const initialState = {}
-const enhancer = applyMiddleware(reduxAsyncActionsMiddleware)
+const enhancer = applyMiddleware(asyncActionsMiddleware)
 
 export default createStore(reducer, initialState, enhancer)
 ```
@@ -67,7 +69,7 @@ const reducers = combineReducers({
     start: () => ({ fetching: true }),               
     success: (state, payload) => ({ user: payload }),
     error: (state, payload) => ({ reason: payload })
-  }))
+  }, {}))
 })
 
 // states produced:
@@ -80,7 +82,7 @@ You can simplify the handlers by just supplying a function, which will simply be
 
 ```js
 const reducers = combineReducers({
-  user: handleActions(asyncHandlers(LOAD_USER, (state, payload) => ({ user: payload })))
+  user: handleActions(asyncHandlers(LOAD_USER, (state, payload) => ({ user: payload })), {})
 })
 
 // states produced:

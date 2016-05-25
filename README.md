@@ -5,7 +5,7 @@ A simple wrapper around async redux actions.
 ## Install:
 
 ```sh
-npm install --save @spalger/async-redux-actions
+npm install --save @spalger/redux-async-actions
 ```
 
 ## Setup:
@@ -32,7 +32,7 @@ export function loadUser(id) {
 ```js
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
-import { asyncHandlers } from '../'
+import { asyncHandlers } from '@spalger/redux-async-actions'
 
 import { LOAD_USER } from './actions'
 
@@ -44,7 +44,7 @@ export default combineReducers({
 **store.js**
 ```js
 import { createStore, applyMiddleware } from 'redux'
-import { middleware as asyncActionsMiddleware } from '../'
+import { middleware as asyncActionsMiddleware } from '@spalger/redux-async-actions'
 
 import reducer from './reducer'
 const initialState = {}
